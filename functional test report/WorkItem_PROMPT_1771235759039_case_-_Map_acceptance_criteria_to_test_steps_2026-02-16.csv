@@ -1,0 +1,24 @@
+S.No,Test Name,Scenario,Step Name,Steps to Execute,Expected Results,Pass/Fail
+1,"case
+- Map acceptance criteria to test steps",This is used to verify that the user is able to use azure devops mcp connector to: - fetch work item id 36237 from project p8ag_emp_comms - parse re,Step 1,"Navigate to the application and access the case
+- Map acceptance criteria to test steps functionality.","A page should be loaded with below options:
+1. Navigation menu should display all available sections
+2. Required form fields or controls should be visible
+3. Page heading should display ""case
+- Map acceptance criteria to test steps""
+4. All UI elements should be properly rendered",
+2,"case
+- Map acceptance criteria to test steps","This is used to verify that the user can interact with case
+- Map acceptance criteria to test steps features",Step 2,"Enter required information and perform the case
+- Map acceptance criteria to test steps action.","System should respond with:
+1. All input fields should accept valid data
+2. Validation rules should be applied correctly
+3. Interactive elements (buttons, dropdowns) should function properly
+4. Real-time feedback should be provided for user actions",
+3,"case
+- Map acceptance criteria to test steps","This is used to verify successful completion of case
+- Map acceptance criteria to test steps",Step 3,Submit the form or complete the action and verify the outcome.,"Successful completion should show:
+1. Success message or confirmation notification
+2. Updated data should be displayed correctly
+3. User should be able to view the results
+4. System state should reflect the completed action",

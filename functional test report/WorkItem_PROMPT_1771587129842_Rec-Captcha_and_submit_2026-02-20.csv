@@ -1,0 +1,5 @@
+S.No,Test Name,Scenario,Step Name,Steps to Execute,Expected Results,Pass/Fail
+1,Launch Application,This is used to verify that the user is able to access the application,Step 1,Launch the browser and navigate to the application URL,Home page loads successfully without errors.,
+2,Verify UI Elements,This is used to verify that all UI elements are displayed correctly,Step 2,Observe the main page interface and verify all elements are present.,"All required UI elements are displayed correctly including navigation menu, buttons, and content sections.",
+3,Perform Main Action,This is used to verify that the user can perform the required action,Step 3,Perform the main functionality test for Rec-Captcha and submit.,The action completes successfully. User sees the expected response and can proceed to next steps.,
+4,Verify Results,This is used to verify that the action produced expected results,Step 4,Verify the outcome of the performed action.,Expected results are displayed correctly. All data and UI elements reflect the completed action.,

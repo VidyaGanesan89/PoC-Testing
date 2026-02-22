@@ -1,0 +1,3 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_1771673632_01,Remove from cart,User is on the Given user is on product page,"1. user has items in cart
+2. user clicks Remove",Item is removed.

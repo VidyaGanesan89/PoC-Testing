@@ -1,0 +1,38 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_1771673053_01,Successful submission with valid details,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Fill in all required fields with valid data
+3. Click the Submit button
+4. Observe and verify the result",Form is submitted successfully and a confirmation message is displayed to the user.
+TC_1771673053_02,Missing mandatory fields,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Leave one or more mandatory fields empty
+3. Click the Submit button
+4. Observe and verify the result",Inline validation messages are displayed for each empty mandatory field.
+TC_1771673053_03,Invalid email format,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Fill in all required fields with valid data
+3. Click the Submit button
+4. Observe and verify the result",An error message indicating an invalid email format is displayed.
+TC_1771673053_04,Invalid phone number,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Enter an invalid phone number
+3. Fill in all other required fields with valid data
+4. Click the Submit button
+5. Observe and verify the result",A phone number validation error message is displayed.
+TC_1771673053_05,Submission without reCAPTCHA,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Fill in all required fields with valid data
+3. Skip the reCAPTCHA step
+4. Click the Submit button
+5. Observe and verify the result",A validation message prompts the user to complete the reCAPTCHA before submitting.
+TC_1771673053_06,Dropdown and radio button validation,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Select a value from the dropdown field(s)
+3. Select a radio button option
+4. Verify the selections are accepted without errors
+5. Observe and verify the result",All dropdown selections and radio button choices are accepted without errors.
+TC_1771673053_07,System error during submission,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Fill in all required fields with valid data
+3. Simulate a system/server error condition
+4. Click the Submit button
+5. Observe and verify the result",A user-friendly error message is displayed with an option to retry.
+TC_1771673053_08,Usability and accessibility validation,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Navigate through all form fields using the keyboard (Tab key)
+3. Verify all labels and ARIA attributes are present
+4. Check colour contrast and focus indicators
+5. Observe and verify the result","All form elements are accessible via keyboard, labels are correctly associated, and WCAG contrast ratios are met."

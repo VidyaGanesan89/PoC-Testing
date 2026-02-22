@@ -44,10 +44,6 @@ Thumbs.db
 
 # Test output
 test-output/
-screenshots/
-reports/
-*.png
-*.jpg
 
 # Logs
 logs/
@@ -72,9 +68,6 @@ yarn-error.log*
 frontend/build/
 
 # Performance / test result artifacts
-performance-results/
-functional test report/
-functional test screenshots/
 RAG_ViewHistory/data/test-runs/*.json
 backend/data/test-history.json
 

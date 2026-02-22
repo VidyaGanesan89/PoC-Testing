@@ -1,0 +1,7 @@
+S.No,Test Name,Scenario,Step Name,Steps to Execute,Expected Results,Pass/Fail
+1,Test_CSV_Generation,Verify CSV writer functionality,Step 1,Initialize the CSV writer service,CSV writer should be ready to generate files,
+2,Test_CSV_Generation,Verify CSV writer functionality,Step 2,"Generate CSV file with test data containing special characters: commas, quotes"", and newlines","CSV should properly escape special characters:
+- Commas in values
+- Quotes in text
+- Newlines preserved",
+3,Test_CSV_Generation,Verify CSV writer functionality,Step 3,Verify file creation in functional test report directory,File should exist with proper naming: WorkItem_99999_Test_CSV_Generation_YYYY-MM-DD.csv,

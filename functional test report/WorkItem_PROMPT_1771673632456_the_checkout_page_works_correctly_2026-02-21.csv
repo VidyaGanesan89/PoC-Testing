@@ -1,0 +1,5 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_1771673632_01,the checkout page works correctly,User is on the Verify the checkout page,"1. Navigate to the Verify the checkout page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.

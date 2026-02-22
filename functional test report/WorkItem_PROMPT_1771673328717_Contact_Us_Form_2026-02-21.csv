@@ -1,0 +1,13 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_1771673328_01,Successful submission with valid details,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Fill in all required fields with valid data
+3. Click the Submit button
+4. Observe and verify the result",Form is submitted successfully and a confirmation message is displayed to the user.
+TC_1771673328_02,Missing mandatory fields,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Leave one or more mandatory fields empty
+3. Click the Submit button
+4. Observe and verify the result",Inline validation messages are displayed for each empty mandatory field.
+TC_1771673328_03,Invalid email format,User is on the Contact Us page,"1. Navigate to the Contact Us page
+2. Fill in all required fields with valid data
+3. Click the Submit button
+4. Observe and verify the result",An error message indicating an invalid email format is displayed.

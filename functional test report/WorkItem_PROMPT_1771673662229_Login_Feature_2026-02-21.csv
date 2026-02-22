@@ -1,0 +1,17 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_1771673662_01,Valid credentials,User is on the Login page,"1. Navigate to the Login page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_1771673662_02,Invalid password,User is on the Login page,"1. Navigate to the Login page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_1771673662_03,Locked account,User is on the Login page,"1. Navigate to the Login page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_1771673662_04,Forgot password flow,User is on the Login page,"1. Navigate to the Login page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.

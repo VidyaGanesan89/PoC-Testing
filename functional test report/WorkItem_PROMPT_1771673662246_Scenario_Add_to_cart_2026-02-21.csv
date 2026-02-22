@@ -1,0 +1,5 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_1771673662_01,Add to cart,User is on the Given user is on product page,"1. user is on product page
+2. user clicks Add to Cart",Item appears in cart.
+TC_1771673662_02,Remove from cart,User is on the Given user is on product page,"1. user has items in cart
+2. user clicks Remove",Item is removed.

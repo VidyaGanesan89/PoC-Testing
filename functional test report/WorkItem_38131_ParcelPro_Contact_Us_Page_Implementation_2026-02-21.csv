@@ -1,0 +1,134 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_38131_01,"Contact form with name, email, subject, and message fields",User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_02,Form validation for all required fields,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Fill in all required fields with valid data
+3. Click the Submit button
+4. Observe and verify the result",Inline validation messages are displayed for each empty mandatory field.
+TC_38131_03,Email address validation,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_04,Submit button with success/error feedback,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Fill in all required fields with valid data
+3. Simulate a system/server error condition
+4. Click the Submit button
+5. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_05,"Display company contact information (phone, email, address)",User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_06,Embedded location map (Google Maps or equivalent),User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_07,Implement CSRF protection on form submission,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_08,Sanitize all user inputs to prevent XSS attacks,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_09,Rate limiting to prevent spam submissions,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_10,HTTPS required for form submission,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_11,Contact form should load within 2 seconds,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_12,Mobile responsive design (320px to 1920px),User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_13,WCAG 2.1 Level AA accessibility compliance,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Navigate through all form fields using the keyboard (Tab key)
+3. Verify all labels and ARIA attributes are present
+4. Check colour contrast and focus indicators
+5. Observe and verify the result","All form elements are accessible via keyboard, labels are correctly associated, and WCAG contrast ratios are met."
+TC_38131_14,"Support for all modern browsers (Chrome, Firefox, Safari, Edge)",User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_15,Backend email service integration,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_16,Google Maps API key,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_17,SMTP server configuration,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_18,Existing authentication system for logged-in users,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_19,Users will have a valid email address,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_20,Customer support team can receive and respond to inquiries,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_21,Email delivery is reliable,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_22,Google Maps is accessible in target regions,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Navigate through all form fields using the keyboard (Tab key)
+3. Verify all labels and ARIA attributes are present
+4. Check colour contrast and focus indicators
+5. Observe and verify the result","All form elements are accessible via keyboard, labels are correctly associated, and WCAG contrast ratios are met."
+TC_38131_23,Contact form is fully functional and tested,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_24,All validation rules are implemented and working,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_25,Email notifications are sent to customer support,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_26,UI is responsive on all device sizes,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_27,Accessibility audit passed,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Navigate through all form fields using the keyboard (Tab key)
+3. Verify all labels and ARIA attributes are present
+4. Check colour contrast and focus indicators
+5. Observe and verify the result","All form elements are accessible via keyboard, labels are correctly associated, and WCAG contrast ratios are met."
+TC_38131_28,Code review completed,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_29,Unit tests written with >80% coverage,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_30,Integration tests passed,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_31,Security scan completed with no critical issues,User is on the ParcelPro Contact Us page,"1. Navigate to the ParcelPro Contact Us page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
+TC_38131_32,Documentation updated,User is on the ParcelPro Contact Us page,"1. I am a ParcelPro customer
+2. I navigate to the Contact Us page
+3. I have filled out the contact form
+4. I click the Submit button
+5. I should see a confirmation message","I should see a contact form with fields for name, email, subject, and message."
