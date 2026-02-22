@@ -1,0 +1,24 @@
+{
+  "name": "azure-devops-work-item-mcp",
+  "description": "MCP connector settings for Azure DevOps Work Item automation",
+  "transport": "rest",
+  "organizationUrl": "https://dev.azure.com/UPSProd8",
+  "project": "P8AG_Emp_comms",
+  "auth": {
+    "mode": "pat-or-oauth",
+    "patEnv": "AZURE_DEVOPS_PAT",
+    "oauthEnv": "AZURE_DEVOPS_OAUTH_TOKEN"
+  },
+  "defaults": {
+    "testStatusField": "Custom.TestStatus",
+    "workItemType": "Task",
+    "state": "Active"
+  },
+  "operations": [
+    "readWorkItems",
+    "createWorkItem",
+    "updateWorkItem",
+    "linkWorkItems",
+    "addComment"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "selenium-prompt-validation",
+  "version": "1.0.0",
+  "description": "Duplicate detection system for Selenium test generation using hash and embedding-based similarity",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/runTests.js",
+    "example": "node examples/basicUsage.js"
+  },
+  "keywords": [
+    "selenium",
+    "duplicate-detection",
+    "embedding",
+    "hash",
+    "test-automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+# Example: Sample test run data
+{
+  "runId": "run_1737732000000_abc123xyz",
+  "testType": "Functional",
+  "prompt": "Test language selection from English to Japan - English",
+  "testClass": "parcelprotests.ParcelProLanguageSelectTest",
+  "testMethod": "verifyLanguageSelection",
+  "status": "Passed",
+  "duration": 5432,
+  "timestamp": "2026-01-24T12:00:00.000Z",
+  "errorLogs": [],
+  "reportPath": "functional test report/Test_Report_2026-01-24.html",
+  "screenshots": [
+    "functional test screenshots/test_screenshot_1.png",
+    "functional test screenshots/test_screenshot_2.png"
+  ],
+  "exitCode": 0,
+  "metrics": {
+    "pageLoadTime": 1234,
+    "interactionTime": 2198
+  }
+}

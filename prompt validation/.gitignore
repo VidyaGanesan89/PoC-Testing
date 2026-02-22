@@ -1,0 +1,26 @@
+# Node modules
+node_modules/
+
+# Registry data (optional - comment out if you want to track it)
+backend/data/test-registry.json
+
+# Temporary test files
+backend/data/test-registry-temp*.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+  <configuration>
+    <theme>STANDARD</theme>
+    <encoding>UTF-8</encoding>
+    <protocol>HTTPS</protocol>
+    <documentTitle>ParcelPro Automation Report</documentTitle>
+    <reportName>ParcelPro Test Report</reportName>
+    <timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+  </configuration>
+</extentreports>

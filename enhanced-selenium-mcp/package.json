@@ -1,0 +1,24 @@
+{
+  "name": "enhanced-selenium-wrapper",
+  "version": "2.0.0",
+  "description": "Enhanced Selenium WebDriver wrapper library (no external dependencies required)",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "info": "echo This library can be used directly - no npm install needed if selenium-webdriver is already in your project"
+  },
+  "keywords": [
+    "selenium",
+    "webdriver",
+    "automation",
+    "testing"
+  ],
+  "author": "Development Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "selenium-webdriver": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

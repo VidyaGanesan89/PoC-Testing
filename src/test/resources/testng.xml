@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ParcelPro Automation Test Suite" parallel="false" verbose="1">
+    
+    <listeners>
+        <!-- TestListener for HTML reports and screenshots -->
+        <listener class-name="utility.TestListener"/>
+    </listeners>
+    
+    <test name="ParcelPro Functional Tests" preserve-order="true">
+        <classes>
+            <!-- All AI-generated test classes -->
+            <class name="tests.LanguageSelectTest"/>
+            <class name="tests.ParcelProLanguageSelectTest"/>
+            <class name="tests.ContactUsFormTest"/>
+        </classes>
+    </test>
+    
+</suite>
