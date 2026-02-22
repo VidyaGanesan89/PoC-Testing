@@ -66,25 +66,25 @@ const FixTestError = () => {
   };
 
   return (
-    <div className="bg-gray-900 border border-gray-700 rounded-xl p-5 space-y-4">
+    <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4 shadow-sm">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <Wrench className="text-yellow-400" size={20} />
-        <h3 className="text-white font-semibold text-base">Fix Test Error with AI</h3>
-        <span className="ml-auto text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded">
+        <Wrench className="text-yellow-500" size={20} />
+        <h3 className="text-gray-900 font-semibold text-base">Fix Test Error with AI</h3>
+        <span className="ml-auto text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
           Claude Sonnet 4.6
         </span>
       </div>
 
       {/* Step 1 — Test class name */}
       <div className="space-y-1">
-        <label className="text-xs text-gray-400 font-medium">1. Test Class Name</label>
+        <label className="text-xs text-gray-600 font-medium">1. Test Class Name</label>
         <div className="flex gap-2">
           {testClasses.length > 0 && (
             <select
               value={testClassName}
               onChange={e => setTestClassName(e.target.value)}
-              className="flex-1 bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-yellow-500"
+              className="flex-1 bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-yellow-500"
             >
               <option value="">— pick from list —</option>
               {testClasses.map(cls => (
@@ -97,26 +97,26 @@ const FixTestError = () => {
             placeholder={testClasses.length > 0 ? 'or type class name…' : 'e.g. GeneratedTest_1771779003075'}
             value={testClassName}
             onChange={e => setTestClassName(e.target.value)}
-            className="flex-1 bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500"
+            className="flex-1 bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-yellow-500"
           />
         </div>
       </div>
 
       {/* Step 2 — Error message */}
       <div className="space-y-1">
-        <label className="text-xs text-gray-400 font-medium">2. Paste the Error / Stack Trace</label>
+        <label className="text-xs text-gray-600 font-medium">2. Paste the Error / Stack Trace</label>
         <textarea
           rows={8}
           value={errorMessage}
           onChange={e => setErrorMessage(e.target.value)}
           placeholder={`Paste the full error here. For example:\n\njava.lang.AssertionError: First Name entered successfully\n\tat tests.GeneratedTest_1771779003075.testRequestASpeakerForm(GeneratedTest_1771779003075.java:55)\n...\nor just the relevant part of the test log.`}
-          className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-xs text-gray-200 placeholder-gray-600 font-mono focus:outline-none focus:border-yellow-500 resize-y"
+          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-xs text-gray-800 placeholder-gray-400 font-mono focus:outline-none focus:border-yellow-500 resize-y"
         />
       </div>
 
       {/* Step 3 — LLM selector */}
       <div className="flex items-center gap-3">
-        <label className="text-xs text-gray-400 font-medium">3. Fix with:</label>
+        <label className="text-xs text-gray-600 font-medium">3. Fix with:</label>
         {['Claude Sonnet 4.6', 'GPT-4o'].map(opt => (
           <label key={opt} className="flex items-center gap-1.5 cursor-pointer">
             <input
@@ -125,9 +125,9 @@ const FixTestError = () => {
               value={opt}
               checked={llm === opt}
               onChange={() => setLlm(opt)}
-              className="accent-yellow-400"
+              className="accent-yellow-500"
             />
-            <span className="text-sm text-gray-300">{opt}</span>
+            <span className="text-sm text-gray-700">{opt}</span>
           </label>
         ))}
       </div>
@@ -137,7 +137,7 @@ const FixTestError = () => {
         <button
           onClick={handleFix}
           disabled={status === 'fixing'}
-          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-700 disabled:text-gray-500 text-black font-semibold px-5 py-2 rounded-lg text-sm transition-colors"
+          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 disabled:bg-gray-200 disabled:text-gray-400 text-black font-semibold px-5 py-2 rounded-lg text-sm transition-colors"
         >
           {status === 'fixing'
             ? <><Loader2 size={15} className="animate-spin" /> Fixing with {llm}…</>
@@ -147,7 +147,7 @@ const FixTestError = () => {
         {(status === 'fixed' || status === 'error') && (
           <button
             onClick={handleReset}
-            className="text-xs text-gray-400 hover:text-white underline"
+            className="text-xs text-gray-500 hover:text-gray-900 underline"
           >
             Reset
           </button>
@@ -156,28 +156,28 @@ const FixTestError = () => {
 
       {/* Result banner */}
       {status === 'fixed' && result && (
-        <div className="bg-green-900/40 border border-green-700 rounded-lg p-3 flex gap-3 items-start">
-          <CheckCircle2 className="text-green-400 shrink-0 mt-0.5" size={18} />
+        <div className="bg-green-50 border border-green-300 rounded-lg p-3 flex gap-3 items-start">
+          <CheckCircle2 className="text-green-600 shrink-0 mt-0.5" size={18} />
           <div>
-            <p className="text-green-300 font-semibold text-sm">Files fixed and saved!</p>
-            <p className="text-green-400 text-xs mt-0.5">{result.message}</p>
-            <p className="text-gray-400 text-xs mt-1">
-              Run <code className="bg-gray-800 px-1 rounded">mvn test -Dtest={testClassName}</code> to verify.
+            <p className="text-green-700 font-semibold text-sm">Files fixed and saved!</p>
+            <p className="text-green-600 text-xs mt-0.5">{result.message}</p>
+            <p className="text-gray-600 text-xs mt-1">
+              Run <code className="bg-gray-100 px-1 rounded">mvn test -Dtest={testClassName}</code> to verify.
             </p>
           </div>
         </div>
       )}
 
       {status === 'error' && result && (
-        <div className="bg-red-900/40 border border-red-700 rounded-lg p-3 flex gap-3 items-start">
-          <AlertCircle className="text-red-400 shrink-0 mt-0.5" size={18} />
+        <div className="bg-red-50 border border-red-300 rounded-lg p-3 flex gap-3 items-start">
+          <AlertCircle className="text-red-500 shrink-0 mt-0.5" size={18} />
           <div>
-            <p className="text-red-300 font-semibold text-sm">Fix failed</p>
-            <p className="text-red-400 text-xs mt-0.5">{result.error}</p>
+            <p className="text-red-700 font-semibold text-sm">Fix failed</p>
+            <p className="text-red-600 text-xs mt-0.5">{result.error}</p>
             {result.rawResponse && (
               <details className="mt-2">
-                <summary className="text-xs text-gray-400 cursor-pointer">Show LLM raw response</summary>
-                <pre className="text-xs text-gray-400 mt-1 whitespace-pre-wrap bg-gray-800 p-2 rounded max-h-40 overflow-y-auto">
+                <summary className="text-xs text-gray-500 cursor-pointer">Show LLM raw response</summary>
+                <pre className="text-xs text-gray-700 mt-1 whitespace-pre-wrap bg-gray-100 p-2 rounded max-h-40 overflow-y-auto">
                   {result.rawResponse}
                 </pre>
               </details>

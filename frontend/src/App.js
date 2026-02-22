@@ -44,6 +44,8 @@ function App() {
   const [scriptViewerData, setScriptViewerData] = useState(null);
   const trackersRef = useRef(new Map());
   const autoRetryTriggeredRef = useRef(new Set());
+  const fixTestErrorRef = useRef(null);
+  const [showFixTestError, setShowFixTestError] = useState(false);
 
   // JMeter / Performance test state
   const [jmeterProgress,    setJmeterProgress]    = useState(null);
@@ -563,16 +565,7 @@ function App() {
     setIsRunning(true);
     try {
       let response;
-      if (type === 'functional') {
-        // Run multiple existing functional tests
-        response = await testApi.runTest({
-          testType: 'functional',
-          testClass: 'ContactUsFormTest,LanguageSelectTest,OfficesCountrySelectTest,InsureShieldCountrySelectTest,InsureShieldDeliveryDefenseTest,GeneratedTest_1771780168393,GeneratedTest_1771780645231',
-          browser: 'chrome',
-          headless: false
-        });
-
-      } else if (type === 'performance') {
+      if (type === 'performance') {
         response = await testApi.runTest({
           testType: 'performance',
           testClass: '',
@@ -725,14 +718,7 @@ function App() {
         {/* Quick Actions */}
         <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-bold text-white mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <QuickActionCard
-              icon="🧪"
-              title="Run Functional Tests"
-              description="Execute Selenium test suites"
-              onClick={() => handleQuickAction('functional')}
-              color="purple"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <QuickActionCard
               icon="📋"
               title="Azure Boards – Work Item Management"
@@ -741,17 +727,26 @@ function App() {
               color="orange"
             />
             <QuickActionCard
-              icon="🕐"
-              title="View History"
-              description="Review past test results"
-              onClick={() => { }}
+              icon="�"
+              title="Fix Test Error with AI"
+              description="Auto-fix failing test errors using AI"
+              onClick={() => {
+                setShowFixTestError(prev => {
+                  if (!prev) setTimeout(() => fixTestErrorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+                  return !prev;
+                });
+              }}
               color="blue"
             />
           </div>
         </div>
 
         {/* Fix Test Error */}
-        <FixTestError apiBaseUrl="http://localhost:8080/api" />
+        {showFixTestError && (
+          <div ref={fixTestErrorRef} className="mb-8">
+            <FixTestError apiBaseUrl="http://localhost:8080/api" />
+          </div>
+        )}
 
         {/* Test History */}
         <TestHistory history={history} />

@@ -1,0 +1,5 @@
+Test Case ID,Title,Preconditions,Test Steps,Expected Result
+TC_1771783731_01,ready for test,User is on the application page,"1. Navigate to the application page
+2. Interact with the relevant page elements
+3. Perform the main action described in the scenario
+4. Observe and verify the result",The action completes successfully with the expected outcome displayed.
