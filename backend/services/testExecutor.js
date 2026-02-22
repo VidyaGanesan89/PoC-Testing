@@ -209,8 +209,8 @@ class TestExecutor {
         exitCode: testExecution.exitCode
       });
 
-      // Keep only last 100 results
-      history = history.slice(0, 100);
+      // Keep only last 500 results
+      history = history.slice(0, 500);
 
       await fs.writeFile(historyFile, JSON.stringify(history, null, 2));
     } catch (error) {
