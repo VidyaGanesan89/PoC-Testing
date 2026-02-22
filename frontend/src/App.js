@@ -12,6 +12,7 @@ import TestCaseMatches from './components/TestCaseMatches';
 import ScriptViewerModal from './components/ScriptViewerModal';
 import AzureDevOpsStoryCreator from './components/AzureDevOpsStoryCreator';
 import JMeterResultsPanel from './components/JMeterResultsPanel';
+import FixTestError from './components/FixTestError';
 import { testApi } from './services/api';
 import websocketService from './services/websocket';
 
@@ -748,6 +749,9 @@ function App() {
             />
           </div>
         </div>
+
+        {/* Fix Test Error */}
+        <FixTestError apiBaseUrl="http://localhost:8080/api" />
 
         {/* Test History */}
         <TestHistory history={history} />
