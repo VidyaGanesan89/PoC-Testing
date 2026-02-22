@@ -11,8 +11,12 @@
         <classes>
             <!-- All AI-generated test classes -->
             <class name="tests.LanguageSelectTest"/>
-            <class name="tests.ParcelProLanguageSelectTest"/>
             <class name="tests.ContactUsFormTest"/>
+            <class name="tests.OfficesCountrySelectTest"/>
+            <class name="tests.InsureShieldCountrySelectTest"/>
+            <class name="tests.InsureShieldDeliveryDefenseTest"/>
+            <class name="tests.GeneratedTest_1771780168393"/>
+            <class name="tests.GeneratedTest_1771780645231"/>
         </classes>
     </test>
     

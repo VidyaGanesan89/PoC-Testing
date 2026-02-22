@@ -566,7 +566,7 @@ function App() {
         // Run multiple existing functional tests
         response = await testApi.runTest({
           testType: 'functional',
-          testClass: 'ContactUsFormTest,LanguageSelectTest,OfficesCountrySelectTest',
+          testClass: 'ContactUsFormTest,LanguageSelectTest,OfficesCountrySelectTest,InsureShieldCountrySelectTest,InsureShieldDeliveryDefenseTest,GeneratedTest_1771780168393,GeneratedTest_1771780645231',
           browser: 'chrome',
           headless: false
         });
