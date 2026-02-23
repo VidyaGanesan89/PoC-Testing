@@ -33,7 +33,7 @@ function App() {
   const [connectionStatus, setConnectionStatus] = useState('Connecting...');
   const [generatedArtifacts, setGeneratedArtifacts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentView, setCurrentView] = useState('test-generation'); // 'test-generation' or 'azure-devops'
+  const [currentView, setCurrentView] = useState('test-generation'); // 'test-generation', 'azure-devops', or 'test-history'
   
   // New state for test case matching
   const [testMatches, setTestMatches] = useState(null);
@@ -45,6 +45,7 @@ function App() {
   const trackersRef = useRef(new Map());
   const autoRetryTriggeredRef = useRef(new Set());
   const fixTestErrorRef = useRef(null);
+  const testHistoryRef = useRef(null);
   const [showFixTestError, setShowFixTestError] = useState(false);
 
   // JMeter / Performance test state
@@ -634,6 +635,16 @@ function App() {
             >
               📋 Azure DevOps
             </button>
+            <button
+              onClick={() => handleViewChange('test-history')}
+              className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-all ${
+                currentView === 'test-history'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                  : 'text-white hover:bg-white hover:bg-opacity-10'
+              }`}
+            >
+              🕐 AI Test History
+            </button>
           </div>
         </div>
 
@@ -718,7 +729,7 @@ function App() {
         {/* Quick Actions */}
         <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-bold text-white mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <QuickActionCard
               icon="📋"
               title="Azure Boards – Work Item Management"
@@ -727,7 +738,14 @@ function App() {
               color="orange"
             />
             <QuickActionCard
-              icon="�"
+              icon="🕐"
+              title="View Test History"
+              description="Review past test results and AI insights"
+              onClick={() => handleViewChange('test-history')}
+              color="purple"
+            />
+            <QuickActionCard
+              icon="🔧"
               title="Fix Test Error with AI"
               description="Auto-fix failing test errors using AI"
               onClick={() => {
@@ -751,20 +769,26 @@ function App() {
         {/* Test History */}
         <TestHistory history={history} />
 
-        {/* RAG-Powered Test History Analysis */}
-        <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-white mb-6">AI-Powered Test History</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <TestHistoryChat apiBaseUrl="http://localhost:8080/api" />
-            <HistoryInsights apiBaseUrl="http://localhost:8080/api" />
-          </div>
-        </div>
           </>
         )}
 
         {/* Azure DevOps View */}
         {currentView === 'azure-devops' && (
           <AzureDevOpsStoryCreator onStoryCreated={handleStoryCreated} />
+        )}
+
+        {/* AI Test History View */}
+        {currentView === 'test-history' && (
+          <>
+            {/* RAG-Powered Test History Analysis */}
+            <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-6 mb-8">
+              <h2 className="text-2xl font-bold text-white mb-6">AI-Powered Test History</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                <TestHistoryChat apiBaseUrl="http://localhost:8080/api" />
+                <HistoryInsights apiBaseUrl="http://localhost:8080/api" />
+              </div>
+            </div>
+          </>
         )}
       </div>
 

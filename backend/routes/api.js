@@ -674,6 +674,50 @@ router.post('/generate-ai-test', async (req, res) => {
   }
 });
 
+// POST /api/azure-devops/generate-acceptance-criteria - AI-generate Gherkin acceptance criteria
+router.post('/azure-devops/generate-acceptance-criteria', async (req, res) => {
+  const { title, description, workItemType = 'User Story' } = req.body;
+
+  if (!title || !title.trim()) {
+    return res.status(400).json({ success: false, error: 'Title is required' });
+  }
+
+  let generator = claudeGenerator || gptGenerator;
+  if (!generator) {
+    return res.status(503).json({ success: false, error: 'No AI model configured.' });
+  }
+
+  const systemPrompt = `You are an expert Agile Business Analyst. Generate clear, concise Acceptance Criteria in Gherkin (Given/When/Then) format for Azure DevOps work items. 
+Rules:
+- Write 3-5 scenarios covering happy path and key edge cases
+- Use plain text Gherkin — no markdown, no code blocks, no extra formatting
+- Start each scenario with "Scenario:" on its own line
+- Each Given/When/Then on its own line
+- Separate scenarios with a blank line
+- Be specific to the title and description provided`;
+
+  const userPrompt = `Work Item Type: ${workItemType}
+Title: ${title.trim()}
+${description && description.trim() ? `Description: ${description.trim()}` : ''}
+
+Generate acceptance criteria in Gherkin format for this work item.`;
+
+  try {
+    let aiText;
+    if (generator === gptGenerator && typeof generator._callOpenAI === 'function') {
+      aiText = await generator._callOpenAI(systemPrompt, userPrompt);
+    } else if (typeof generator._callClaude === 'function') {
+      aiText = await generator._callClaude(systemPrompt, userPrompt);
+    } else {
+      throw new Error('Generator has no callable LLM method');
+    }
+    res.json({ success: true, acceptanceCriteria: aiText.trim() });
+  } catch (e) {
+    console.error('[GENERATE-AC] Error:', e.message);
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
 // GET /api/azure-devops/work-items/:id - Fetch a single work item by ID
 router.get('/azure-devops/work-items/:id', async (req, res) => {
   try {

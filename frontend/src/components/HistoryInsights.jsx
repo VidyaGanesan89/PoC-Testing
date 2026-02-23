@@ -32,7 +32,7 @@ const HistoryInsights = ({ apiBaseUrl = 'http://localhost:8080/api' }) => {
     try {
       const [statsRes, runsRes] = await Promise.all([
         axios.get(`${apiBaseUrl}/test-history/stats`),
-        axios.get(`${apiBaseUrl}/test-history`, { params: { limit: 50, ...filter } })
+        axios.get(`${apiBaseUrl}/test-history`, { params: { limit: 12, ...filter } })
       ]);
 
       setStats(statsRes.data.stats);
@@ -58,7 +58,7 @@ const HistoryInsights = ({ apiBaseUrl = 'http://localhost:8080/api' }) => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Statistics Overview */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
@@ -185,8 +185,9 @@ const HistoryInsights = ({ apiBaseUrl = 'http://localhost:8080/api' }) => {
 
       {/* Test Runs Table */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="overflow-y-auto" style={{ height: '480px' }}>
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="bg-gray-50 sticky top-0 z-10">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Run ID
@@ -245,6 +246,7 @@ const HistoryInsights = ({ apiBaseUrl = 'http://localhost:8080/api' }) => {
             ))}
           </tbody>
         </table>
+        </div>
 
         {testRuns.length === 0 && (
           <div className="text-center py-8 text-gray-500">

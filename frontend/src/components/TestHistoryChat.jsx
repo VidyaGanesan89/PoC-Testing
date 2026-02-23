@@ -96,7 +96,7 @@ const TestHistoryChat = ({ apiBaseUrl = 'http://localhost:8080/api' }) => {
       </div>
 
       {/* Messages */}
-      <div className="h-96 overflow-y-auto p-4 space-y-4 bg-gray-50">
+      <div className="overflow-y-auto p-4 space-y-4 bg-gray-50" style={{ height: '480px' }}>
         {messages.length === 0 && (
           <div className="text-center py-8">
             <Sparkles size={48} className="mx-auto text-purple-400 mb-4" />

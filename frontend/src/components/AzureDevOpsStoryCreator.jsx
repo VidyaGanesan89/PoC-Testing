@@ -18,8 +18,10 @@ const AzureDevOpsStoryCreator = ({ onStoryCreated }) => {
   
   // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGeneratingCriteria, setIsGeneratingCriteria] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [createdItem, setCreatedItem] = useState(null); // holds structured created work item details
 
   // Business value options
   const businessValueOptions = ['High', 'Medium', 'Low'];
@@ -38,6 +40,29 @@ const AzureDevOpsStoryCreator = ({ onStoryCreated }) => {
       return;
     }
 
+    // Auto-generate acceptance criteria from AI if empty
+    let acceptanceCriteriaRef = acceptanceCriteria;
+    if (!acceptanceCriteria.trim() && title.trim()) {
+      setIsGeneratingCriteria(true);
+      try {
+        const acResp = await fetch('http://localhost:8080/api/azure-devops/generate-acceptance-criteria', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title.trim(), description: description.trim(), workItemType }),
+        });
+        const acData = await acResp.json();
+        if (acData.success && acData.acceptanceCriteria) {
+          setAcceptanceCriteria(acData.acceptanceCriteria);
+          // Use the generated value directly since setState is async
+          acceptanceCriteriaRef = acData.acceptanceCriteria;
+        }
+      } catch (acErr) {
+        console.warn('[AC-GEN] Could not auto-generate acceptance criteria:', acErr.message);
+      } finally {
+        setIsGeneratingCriteria(false);
+      }
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -47,8 +72,8 @@ const AzureDevOpsStoryCreator = ({ onStoryCreated }) => {
         fields: {
           'System.Title': title.trim(),
           'System.Description': description.trim() ? `<div>${description.replace(/\n/g, '<br/>')}</div>` : '',
-          'Microsoft.VSTS.Common.AcceptanceCriteria': acceptanceCriteria.trim() ? 
-            `<div><pre>${acceptanceCriteria}</pre></div>` : '',
+          'Microsoft.VSTS.Common.AcceptanceCriteria': (acceptanceCriteriaRef || acceptanceCriteria).trim() ? 
+            `<div><pre>${acceptanceCriteriaRef || acceptanceCriteria}</pre></div>` : '',
           'System.Tags': tags.trim()
         }
       };
@@ -120,20 +145,19 @@ const AzureDevOpsStoryCreator = ({ onStoryCreated }) => {
       
       console.log('Work item created successfully with ID:', workItemId);
       
-      setSuccessMessage(
-        `✅ ${workItemType} created successfully!\n\n` +
-        `Work Item ID: ${workItemId}\n` +
-        `Title: ${title}\n\n` +
-        `View in Azure DevOps: ${workItemUrl}`
-      );
-      
-      // Clear form after successful submission
-      setTimeout(() => {
-        resetForm();
-        if (typeof onStoryCreated === 'function') {
-          onStoryCreated(data.workItem || data);
-        }
-      }, 5000); // Increased to 5 seconds so user can read the message
+      setCreatedItem({
+        id: workItemId,
+        title: title.trim(),
+        type: workItemType,
+        url: workItemUrl,
+        priority: businessValue,
+        tags: tags.trim(),
+        acceptanceCriteria: (acceptanceCriteriaRef || acceptanceCriteria).trim(),
+        description: description.trim(),
+      });
+      setSuccessMessage(''); // clear any stale message
+      setErrorMessage('');
+      // Do NOT auto-reset — user can click "Create Another" to start fresh
 
     } catch (error) {
       console.error('Error creating work item:', error);
@@ -159,6 +183,7 @@ const AzureDevOpsStoryCreator = ({ onStoryCreated }) => {
     setDefinitionOfDone('');
     setErrorMessage('');
     setSuccessMessage('');
+    setCreatedItem(null);
   };
 
   const fillSampleData = () => {
@@ -229,35 +254,83 @@ And I should see a confirmation message`);
           Create well-structured User Stories, Bugs, or Tasks directly in your Azure DevOps project.
         </p>
 
-        {/* Success Message */}
-        {successMessage && (
-          <div className="mb-6 p-6 bg-green-500 bg-opacity-20 border-2 border-green-500 rounded-lg text-white">
-            <div className="flex items-start">
-              <span className="text-3xl mr-4">✅</span>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold mb-2">Work Item Created Successfully!</h3>
-                <div className="space-y-2 text-sm">
-                  {successMessage.split('\n').map((line, index) => {
-                    if (line.trim().startsWith('View in Azure DevOps:')) {
-                      const url = line.split(': ')[1];
-                      return (
-                        <div key={index}>
-                          <a 
-                            href={url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition-colors"
-                          >
-                            🔗 Open Work Item in Azure DevOps
-                          </a>
-                        </div>
-                      );
-                    }
-                    return line.trim() ? <p key={index}>{line}</p> : null;
-                  })}
+        {/* Created Work Item Details Card */}
+        {createdItem && (
+          <div className="mb-6 rounded-xl border-2 border-green-400 overflow-hidden shadow-lg">
+            {/* Header */}
+            <div className="bg-green-500 bg-opacity-30 px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">✅</span>
+                <div>
+                  <h3 className="text-xl font-bold text-white">{createdItem.type} Created Successfully!</h3>
+                  <p className="text-green-200 text-sm">Work Item #{createdItem.id}</p>
                 </div>
               </div>
+              <div className="flex gap-3">
+                <a
+                  href={createdItem.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold text-sm transition-colors flex items-center gap-2"
+                >
+                  🔗 Open in Azure DevOps
+                </a>
+                <button
+                  type="button"
+                  onClick={() => { resetForm(); }}
+                  className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-lg font-semibold text-sm transition-colors"
+                >
+                  ➕ Create Another
+                </button>
+              </div>
             </div>
+            {/* Details */}
+            <div className="bg-white bg-opacity-5 px-6 py-5 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-white">
+              <div>
+                <p className="text-green-300 font-semibold mb-1">Title</p>
+                <p className="font-medium">{createdItem.title}</p>
+              </div>
+              <div>
+                <p className="text-green-300 font-semibold mb-1">Type &amp; Priority</p>
+                <p>{createdItem.type} · <span className={`font-semibold ${
+                  createdItem.priority === 'High' ? 'text-red-300' :
+                  createdItem.priority === 'Medium' ? 'text-yellow-300' : 'text-green-300'
+                }`}>{createdItem.priority}</span></p>
+              </div>
+              {createdItem.description && (
+                <div className="md:col-span-2">
+                  <p className="text-green-300 font-semibold mb-1">Description</p>
+                  <p className="whitespace-pre-wrap text-white text-opacity-90">{createdItem.description}</p>
+                </div>
+              )}
+              {createdItem.acceptanceCriteria && (
+                <div className="md:col-span-2">
+                  <p className="text-green-300 font-semibold mb-1">Acceptance Criteria</p>
+                  <pre className="whitespace-pre-wrap font-mono text-xs bg-white bg-opacity-10 rounded-lg p-3 leading-relaxed">{createdItem.acceptanceCriteria}</pre>
+                </div>
+              )}
+              {createdItem.tags && (
+                <div>
+                  <p className="text-green-300 font-semibold mb-1">Tags</p>
+                  <div className="flex flex-wrap gap-2">
+                    {createdItem.tags.split(/[,;]/).filter(Boolean).map((tag, i) => (
+                      <span key={i} className="px-2 py-0.5 bg-green-600 bg-opacity-50 rounded-full text-xs">{tag.trim()}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div>
+                <p className="text-green-300 font-semibold mb-1">Azure DevOps Link</p>
+                <a href={createdItem.url} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline break-all text-xs">{createdItem.url}</a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Legacy Success Message (fallback) */}
+        {successMessage && !createdItem && (
+          <div className="mb-6 p-6 bg-green-500 bg-opacity-20 border-2 border-green-500 rounded-lg text-white">
+            <p>{successMessage}</p>
           </div>
         )}
 
@@ -318,13 +391,23 @@ And I should see a confirmation message`);
 
           {/* Acceptance Criteria (Gherkin Format) */}
           <div>
-            <label className="block text-white mb-2 font-semibold">
-              Acceptance Criteria (Gherkin Format)
-            </label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-white font-semibold">
+                Acceptance Criteria (Gherkin Format)
+              </label>
+              <span className="text-white text-opacity-60 text-xs italic">
+                ✨ Auto-filled by AI when empty on submit
+              </span>
+            </div>
+            {isGeneratingCriteria && (
+              <div className="mb-2 px-3 py-2 bg-purple-500 bg-opacity-30 border border-purple-400 rounded-lg text-white text-sm flex items-center gap-2">
+                <span className="animate-spin">⏳</span> Generating acceptance criteria with AI...
+              </div>
+            )}
             <textarea
               value={acceptanceCriteria}
               onChange={(e) => setAcceptanceCriteria(e.target.value)}
-              placeholder={`Given [context]\nWhen [action]\nThen [expected result]\n\nExample:\nGiven I am on the Contact Us page\nWhen I fill out the form and click Submit\nThen I should see a success message`}
+              placeholder={`Leave blank to auto-generate from Title & Description\n\nOr write manually:\nGiven [context]\nWhen [action]\nThen [expected result]`}
               rows={6}
               className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-purple-500 font-mono text-sm"
             />
@@ -483,10 +566,10 @@ And I should see a confirmation message`);
           <div className="flex gap-4 pt-4">
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isGeneratingCriteria}
               className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-6 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? '⏳ Creating...' : `🚀 Create ${workItemType}`}
+              {isGeneratingCriteria ? '✨ Generating Criteria...' : isSubmitting ? '⏳ Creating...' : `🚀 Create ${workItemType}`}
             </button>
             
             <button
